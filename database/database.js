@@ -37,16 +37,17 @@ var addLatestPodcast = (series, episodeTitle, pubDate, summary, link) => {
         link
     };
 
-    var lastPodcast = getLatestSavedPodcast(series);
+    var savedPodcast = getLatestSavedPodcast(series);
 
     debugger;
 
-    if(lastPodcast){
+    if(savedPodcast){
         var podcastDate = Date.parse(pubDate);
-        var lastPodcastDate = Date.parse(lastPodcast.pubDate);
-        if(lastPodcastDate < podcastDate){
+        var savedPodcastDate = Date.parse(savedPodcast.pubDate);
+        debugger;
+        if(savedPodcastDate < podcastDate){
             if(removePodcast(series)){
-                console.log(`Removed, ${lastPodcast.series}, ${lastPodcast.title}`);
+                console.log(`Removed, ${savedPodcast.series}, ${savedPodcast.title}`);
                 podcasts.push(podcast);
                 console.log(`Added: ${podcast.series}, ${podcast.title}`);
                 savePodcasts(podcasts);
@@ -85,8 +86,12 @@ var getLatestSavedPodcast = (series) =>{
     }else if(latestPodcast.length > 1){
         throw new Error('More than one podcast of that series saved!');    
     }else{
-        return latestPodcast;
+        return latestPodcast[0];
     }
+}
+
+var isNewerDate = (newPodcast, savedPocast) => {
+
 }
 
 module.exports = {
