@@ -1,6 +1,20 @@
-const twit = require('twit');
+const feedparser = require('feedparser-promised');
 
-const podcastFetch = require('./podcast-fetch/podcastFetch.js');
+const twitter = require('./twitter-bot/twitter_bot.js');
 
-podcastFetch.fetch('http://feeds.codenewbie.org/cnpodcast.xml');
-// podcastFetch.fetch('https://changelog.com/podcast/feed');
+var fetch = (url) => {
+    feedparser.parse(url).then( (items) => {
+        items.forEach((item) => {
+            console.log(`Title: ${item.title}`);
+        }, this);
+    }).catch( (error) => {
+        console.log(`ERROR: ${error}`);
+    });
+};
+
+module.exports = {
+    fetch
+};
+
+fetch('http://feeds.codenewbie.org/cnpodcast.xml');
+fetch('https://changelog.com/podcast/feed');
