@@ -9,8 +9,7 @@
   "author": "Cameron Panagrosso <cameron.panagrosso@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "feedparser": "^2.2.0",
-    "request": "^2.81.0",
+    "feedparser-promised": "^1.2.1",
     "twit": "^2.2.5"
   }
 }
