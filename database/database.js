@@ -90,10 +90,6 @@ var getLatestSavedPodcast = (series) =>{
     }
 }
 
-var isNewerDate = (newPodcast, savedPocast) => {
-
-}
-
 module.exports = {
     removePodcast,
     getLatestSavedPodcast,
