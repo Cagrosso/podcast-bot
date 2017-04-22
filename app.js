@@ -2,17 +2,27 @@ const feedparser = require('feedparser-promised');
 
 const twitter = require('./twitter-bot/twitter_bot.js');
 const db = require('./database/database.js');
+const utils = require('./utils/utils.js');
 
-var fetchPodcastFeed = (url) => {
-    feedparser.parse(url).then( (items) => {
-        items.forEach((item) => {
-            console.log(`Title: ${item.title}`);
-            console.log(`Date: ${item.pubdate}\n`);
-        }, this);
-    }).catch( (error) => {
-        console.log(`ERROR: ${error}`);
+var updatePodcast = (url) => {
+    feedparser.parse(url).then( (podcasts) => {
+        var latestPodcast = podcasts[0];
+
+        console.log(latestPodcast.meta.title);
+
+        db.addLatestPodcast(latestPodcast.meta.title, latestPodcast.title, latestPodcast.pubdate, latestPodcast.summary, latestPodcast.link);
+    }).catch((error) => {
+        console.log(error);
     });
 };
 
-fetchPodcastFeed('http://feeds.codenewbie.org/cnpodcast.xml');
-// fetch('https://changelog.com/podcast/feed');
+// CodeNewbie
+updatePodcast('http://feeds.codenewbie.org/cnpodcast.xml');
+// The Changelog
+updatePodcast('https://changelog.com/podcast/feed');
+// JSParty
+updatePodcast('https://changelog.com/jsparty/feed');
+// Request For Commits
+updatePodcast('https://changelog.com/rfc/feed');
+// Software Engineering Daily
+updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
