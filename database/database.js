@@ -12,9 +12,9 @@ var fetchPodcasts = () => {
 var savePodcasts = (podcasts) => {
     try{
         fs.writeFileSync('podcast-data.json', JSON.stringify(podcasts));
-        console.log('Saved Podcasts');
+        console.log('Saved Podcast');
     }catch(e){
-        console.log('Failed to save podcasts');
+        console.log('Failed to save podcast');
         console.log(e);
     }
 

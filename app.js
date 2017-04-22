@@ -8,7 +8,11 @@ var updatePodcast = (url) => {
     feedparser.parse(url).then( (podcasts) => {
         var latestPodcast = podcasts[0];
 
+        console.log(latestPodcast.meta.title);
+
         db.addLatestPodcast(latestPodcast.meta.title, latestPodcast.title, latestPodcast.pubdate, latestPodcast['itunes:summary']['#'], latestPodcast.link);
+        
+        console.log('\n');
     }).catch((error) => {
         console.log(error);
     });
