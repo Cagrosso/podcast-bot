@@ -26,8 +26,20 @@ var printPodcast = (podcast) => {
     console.log(`Summary: ${podcast.summary}`);
 }
 
+var areValidParameters = (series, episodeTitle, pubDate, summary, link) => {
+    if(series === undefined || episodeTitle === undefined || pubDate === undefined || summary === undefined || link === undefined){
+        return false;
+    }else{
+        return true;
+    };
+}
+
 var addLatestPodcast = (series, episodeTitle, pubDate, summary, link) => {
     var podcasts = fetchPodcasts();
+
+    if(!areValidParameters(series, episodeTitle, pubDate, summary, link)){
+        throw new Error('Podcast input Data not valid!');
+    }
 
     var podcast = {
         series,

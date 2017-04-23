@@ -28,3 +28,5 @@ updatePodcast('https://changelog.com/jsparty/feed');
 updatePodcast('https://changelog.com/rfc/feed');
 // Software Engineering Daily
 updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
+//JavascriptJabber
+updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
