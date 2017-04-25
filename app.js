@@ -10,7 +10,13 @@ var updatePodcast = (url) => {
 
         console.log(latestPodcast.meta.title);
 
-        db.addLatestPodcast(latestPodcast.meta.title, latestPodcast.title, latestPodcast.pubdate, latestPodcast['itunes:summary']['#'], latestPodcast.link);
+        db.addLatestPodcast(latestPodcast.meta.title,
+            latestPodcast.title,
+            latestPodcast.pubdate,
+            latestPodcast['itunes:summary']['#'],
+            latestPodcast.link,
+            latestPodcast.meta['itunes:image']['@']['href']
+            );
         
         console.log('\n');
     }).catch((error) => {

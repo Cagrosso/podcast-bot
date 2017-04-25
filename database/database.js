@@ -26,18 +26,18 @@ var printPodcast = (podcast) => {
     console.log(`Summary: ${podcast.summary}`);
 }
 
-var areValidParameters = (series, episodeTitle, pubDate, summary, link) => {
-    if(series === undefined || episodeTitle === undefined || pubDate === undefined || summary === undefined || link === undefined){
+var areValidParameters = (series, episodeTitle, pubDate, summary, link, imageLink) => {
+    if(series === undefined || episodeTitle === undefined || pubDate === undefined || summary === undefined || link === undefined || imageLink === undefined){
         return false;
     }else{
         return true;
     };
 }
 
-var addLatestPodcast = (series, episodeTitle, pubDate, summary, link) => {
+var addLatestPodcast = (series, episodeTitle, pubDate, summary, link, imageLink) => {
     var podcasts = fetchPodcasts();
 
-    if(!areValidParameters(series, episodeTitle, pubDate, summary, link)){
+    if(!areValidParameters(series, episodeTitle, pubDate, summary, link, imageLink)){
         throw new Error('Podcast input Data not valid!');
     }
 
@@ -46,7 +46,8 @@ var addLatestPodcast = (series, episodeTitle, pubDate, summary, link) => {
         episodeTitle,
         pubDate,
         summary,
-        link
+        link,
+        imageLink
     };
 
     var savedPodcast = getLatestSavedPodcast(series);
