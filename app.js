@@ -28,5 +28,12 @@ updatePodcast('https://changelog.com/jsparty/feed');
 updatePodcast('https://changelog.com/rfc/feed');
 // Software Engineering Daily
 updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
-//JavascriptJabber
+// JavascriptJabber
 updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
+
+// GONNA NEED TO REFACTOR PARAMETER INPUT TO GET THIS TO WORK
+// SUSPECT THAT BEST METHOD WOULD BE TO CREATE A PODCAST OBJECT TO
+// GET MORE GRANULAR CONTROL OVER INPUT PARAMETERS AND WHERE TO FIND
+// THE NEEDED INFORMATION
+// Programming Electronics Podcast
+// updatePodcast('http://programmingelectronics.libsyn.com/rss');
