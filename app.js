@@ -1,6 +1,7 @@
 const feedparser = require('feedparser-promised');
 
 const twitter = require('./twitter-bot/twitter_bot.js');
+const imageMaker = require('./image-create/imageMaker.js');
 const db = require('./database/database.js');
 const utils = require('./utils/utils.js');
 
@@ -36,6 +37,8 @@ updatePodcast('https://changelog.com/rfc/feed');
 updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
 // JavascriptJabber
 updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
+
+// imageMaker.main();
 
 // GONNA NEED TO REFACTOR PARAMETER INPUT TO GET THIS TO WORK
 // SUSPECT THAT BEST METHOD WOULD BE TO CREATE A PODCAST OBJECT TO
