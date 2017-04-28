@@ -12,7 +12,7 @@ module.exports.createPhoto = () => {
             },
             siteType: 'file',
             defaultWhiteBackground: true,
-
+            quality: 80
         },
         (err) => {
             console.log(err);
