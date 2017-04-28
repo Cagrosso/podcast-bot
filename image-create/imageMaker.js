@@ -1,9 +1,15 @@
 const webshot = require('webshot');
 
-module.exports.main = () => {
+module.exports.adaptForPodcast
+
+module.exports.createPhoto = () => {
     webshot(__dirname + '/views/photoLayout.html',
-        'photo.png', 
+        __dirname + '/photos/photo.png', 
         {
+            windowSize: {
+                width: 600,
+                height: 600
+            },
             siteType: 'file',
             defaultWhiteBackground: true,
 
