@@ -103,9 +103,15 @@ var getLatestSavedPodcast = (series) =>{
     }
 }
 
+var getSavedPodcastSeriesList = () => {
+    var podcasts = fetchPodcasts();
+    return seriesList = podcasts.map((podcast) => {return podcast.series});
+}
+
 module.exports = {
     removePodcast,
     getLatestSavedPodcast,
     addLatestPodcast,
-    printPodcast
+    printPodcast,
+    getSavedPodcastSeriesList
 }

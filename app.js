@@ -25,6 +25,15 @@ var updatePodcast = (url) => {
     });
 };
 
+var generateImages = () => {
+    var seriesList = db.getSavedPodcastSeriesList();
+    seriesList.map((series) => {
+        var podcast = db.getLatestSavedPodcast(series);
+        imageMaker.createPhoto(podcast);
+    });
+};
+
+
 // // CodeNewbie
 // updatePodcast('http://feeds.codenewbie.org/cnpodcast.xml');
 // // The Changelog
@@ -38,7 +47,7 @@ var updatePodcast = (url) => {
 // // JavascriptJabber
 // updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
 
-imageMaker.createPhoto();
+generateImages();
 
 // GONNA NEED TO REFACTOR PARAMETER INPUT TO GET THIS TO WORK
 // SUSPECT THAT BEST METHOD WOULD BE TO CREATE A PODCAST OBJECT TO
