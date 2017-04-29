@@ -6,7 +6,6 @@ var adaptForPodcast = (podcast) => {
     var template = hb.compile(source);
     debugger;
     var context = {
-        podcastTitle: podcast.episodeTitle,
         podcastSummary: podcast.summary,
         podcastImage: podcast.imageLink
     }
