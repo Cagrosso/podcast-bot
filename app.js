@@ -11,13 +11,19 @@ var updatePodcast = (url) => {
 
         console.log(latestPodcast.meta.title);
 
-        db.addLatestPodcast(latestPodcast.meta.title,
+        if (db.addLatestPodcast(latestPodcast.meta.title,
             latestPodcast.title,
             latestPodcast.pubdate,
             latestPodcast['itunes:summary']['#'],
             latestPodcast.link,
             latestPodcast.meta['itunes:image']['@']['href']
-            );
+            )){
+                latestPodcast = db.getLatestSavedPodcast(latestPodcast.meta.title);
+                generateImages(latestPodcast);
+                setTimeout(() => {
+                    twitter.postPhoto(latestPodcast);
+                }, 20000)
+            }
         
         console.log('\n');
     }).catch((error) => {
@@ -25,29 +31,24 @@ var updatePodcast = (url) => {
     });
 };
 
-var generateImages = () => {
-    var seriesList = db.getSavedPodcastSeriesList();
-    seriesList.map((series) => {
-        var podcast = db.getLatestSavedPodcast(series);
-        imageMaker.createPhoto(podcast);
-    });
+var generateImages = (podcast) => {
+    imageMaker.createPhoto(podcast);    
 };
 
 
-// // CodeNewbie
-// updatePodcast('http://feeds.codenewbie.org/cnpodcast.xml');
-// // The Changelog
-// updatePodcast('https://changelog.com/podcast/feed');
-// // JSParty
-// updatePodcast('https://changelog.com/jsparty/feed');
-// // Request For Commits
-// updatePodcast('https://changelog.com/rfc/feed');
-// // Software Engineering Daily
-// updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
-// // JavascriptJabber
-// updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
+// The Changelog
+updatePodcast('https://changelog.com/podcast/feed');
+// CodeNewbie
+updatePodcast('http://feeds.codenewbie.org/cnpodcast.xml');
+// JSParty
+updatePodcast('https://changelog.com/jsparty/feed');
+// Request For Commits
+updatePodcast('https://changelog.com/rfc/feed');
+// Software Engineering Daily
+updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
+// JavascriptJabber
+updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
 
-generateImages();
 
 // GONNA NEED TO REFACTOR PARAMETER INPUT TO GET THIS TO WORK
 // SUSPECT THAT BEST METHOD WOULD BE TO CREATE A PODCAST OBJECT TO

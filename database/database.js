@@ -66,14 +66,17 @@ var addLatestPodcast = (series, episodeTitle, pubDate, summary, link, imageLink)
                 savePodcasts(podcasts);
             }else{
                 console.log('Failed to remove podcast');
+                return false;
             }
         }else{
             console.log('No new podcasts');
+            return false;
         }
     }else{
         console.log('New podcast series detected, adding new podcast.');
         podcasts.push(podcast);
         savePodcasts(podcasts);
+        return true;
     }
 };
 
