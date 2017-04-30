@@ -1,4 +1,5 @@
 node_modules/
 podcast-data.json
+config.js
 podcastViews/
 photos/
