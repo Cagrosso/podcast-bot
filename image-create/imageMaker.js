@@ -3,26 +3,54 @@ const fs = require('fs');
 
 var adaptForPodcast = (podcast) => {
     // Worst way to do this... sigh...
-    var adaptedTemplate = fs.createReadStream(__dirname + '/views/photoLayout.html')
-    .pipe(fs.createWriteStream(__dirname + '/podcastViews/' + podcast.series.replace(/\s/g, '') + 'Template.html'));
+    var copyPhotoLayout = fs.createWriteStream(__dirname +
+        '/podcastViews/' +
+        podcast.series.replace(/\s/g, '') +
+        'Template.html');
 
+    var readPhotoLayout = fs.createReadStream(__dirname +
+         '/views/photoLayout.html');
 
+    readPhotoLayout.pipe(copyPhotoLayout);
+
+    copyPhotoLayout.write(
+        `<!DOCTYPE html>
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <html>
+            <body>
+                <div id="table">
+                    <div id="table-row">
+                        <div id="left">
+                            <img id="podcastPhoto" src="${podcast.imageLink}">
+                        </div>
+                        <div id="right">
+                            <h2 id="podcastTitle">${podcast.episodeTitle}</h2>
+                            <h3 id="podcastSummary">${podcast.summary}</h3>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>\n`
+    );
 }
 
 module.exports.createPhoto = (podcast) => {
     adaptForPodcast(podcast);
-    // webshot(__dirname + '/views/photoLayout.html',
-    //     __dirname + '/photos/photo.png', 
-    //     {
-    //         windowSize: {
-    //             width: 730,
-    //             height: 360
-    //         },
-    //         siteType: 'file',
-    //         defaultWhiteBackground: true,
-    //         quality: 80
-    //     },
-    //     (err) => {
-    //         console.log(err);
-    //     });
+    var podName = podcast.series.replace(/\s/g, '');
+    webshot(__dirname + '/podcastViews/' + podName + 'Template.html',
+        __dirname + '/photos/' + podName + 'Photo.png',
+        {
+            windowSize: {
+                width: 730,
+                height: 360
+            },
+            siteType: 'file',
+            defaultWhiteBackground: true,
+            quality: 80
+        },
+        (err) => {
+            console.log(err);
+        });
 }
