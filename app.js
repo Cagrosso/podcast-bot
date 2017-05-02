@@ -7,6 +7,8 @@ const db = require('./database/database.js');
 const utils = require('./utils/utils.js');
 
 var updatePodcast = (url) => {
+    // parse the podcast rss feeds
+    // REFACTOR: MOVE PARSING TO ITS OWN FILE.
     feedparser.parse(url).then((podcasts) => {
         var latestPodcast = podcasts[0];
 
@@ -33,11 +35,13 @@ var updatePodcast = (url) => {
 };
 
 var generateImages = (podcast) => {
+    // run the image generator
     imageMaker.createPhoto(podcast);
 };
 
 
 var job1 = new CronJob({
+    // Runs every 4 hours
     cronTime: '0 0 /4 * * *',
     onTick: () => {
         // The Changelog
@@ -56,7 +60,6 @@ var job1 = new CronJob({
         updatePodcast('https://changelog.com/spotlight/feed');
         // Go Time
         updatePodcast('https://changelog.com/gotime/feed');
-
     },
     start: true,
     timeZone: 'America/New_York'
