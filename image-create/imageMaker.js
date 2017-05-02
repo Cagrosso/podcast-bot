@@ -1,5 +1,6 @@
 const webshot = require('webshot');
 const fs = require('fs');
+const logger = require('simple-node-logger').createSimpleLogger('podcast-bot.log');
 
 var adaptForPodcast = (podcast) => {
     // Worst way to do this... sigh...
@@ -51,6 +52,6 @@ module.exports.createPhoto = (podcast) => {
             quality: 80
         },
         (err) => {
-            console.log(err);
+            logger.error('Failed to create image: ', e);
         });
 }

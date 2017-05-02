@@ -1,6 +1,7 @@
 const twit = require('twit');
 const fs = require('fs');
 const path = require('path');
+const logger = require('simple-node-logger').createSimpleLogger('podcast-bot.log');
 
 const config = require('./config.js');
 
@@ -57,7 +58,7 @@ var postPhoto = (podcast) => {
                 }
 
                 T.post('statuses/update', params, function (err, data, response) {
-                    console.log(data)
+                    logger.info(data)
                 })
             }
         })

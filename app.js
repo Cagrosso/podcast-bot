@@ -1,5 +1,6 @@
 const feedparser = require('feedparser-promised');
-const cron = require('cron').CronJob;
+const cron = require('cron')
+const logger = require('simple-node-logger').createSimpleLogger('podcast-bot.log');
 
 const twitter = require('./twitter-bot/twitter_bot.js');
 const imageMaker = require('./image-create/imageMaker.js');
@@ -12,7 +13,7 @@ var updatePodcast = (url) => {
     feedparser.parse(url).then((podcasts) => {
         var latestPodcast = podcasts[0];
 
-        console.log(latestPodcast.meta.title);
+        logger.info('Getting ', latestPodcast.meta.title);
 
         if (db.addLatestPodcast(latestPodcast.meta.title,
                 latestPodcast.title,
@@ -28,9 +29,8 @@ var updatePodcast = (url) => {
             }, 20000)
         }
 
-        console.log('\n');
     }).catch((error) => {
-        console.log(error);
+        logger.error(error);
     });
 };
 
@@ -40,9 +40,9 @@ var generateImages = (podcast) => {
 };
 
 
-var job1 = new CronJob({
+var job1 = new cron.CronJob({
     // Runs every 4 hours
-    cronTime: '0 0 /4 * * *',
+    cronTime: '0 0 */4 * * *',
     onTick: () => {
         // The Changelog
         updatePodcast('https://changelog.com/podcast/feed');
@@ -64,6 +64,11 @@ var job1 = new CronJob({
     start: true,
     timeZone: 'America/New_York'
 });
+
+logger.info('Starting...');
+console.log('Starting...');
+
+console.log(job1.running);
 
 
 

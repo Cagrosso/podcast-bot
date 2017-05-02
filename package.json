@@ -11,6 +11,7 @@
   "dependencies": {
     "cron": "^1.2.1",
     "feedparser-promised": "^1.2.1",
+    "simple-node-logger": "^0.93.21",
     "twit": "^2.2.5",
     "webshot": "^0.18.0"
   }
