@@ -48,6 +48,10 @@ updatePodcast('https://changelog.com/rfc/feed');
 updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
 // JavascriptJabber
 updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
+// Spotlight
+updatePodcast('https://changelog.com/spotlight/feed');
+// Go Time
+updatePodcast('https://changelog.com/gotime/feed');
 
 
 // GONNA NEED TO REFACTOR PARAMETER INPUT TO GET THIS TO WORK
