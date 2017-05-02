@@ -60,10 +60,15 @@ var addLatestPodcast = (series, episodeTitle, pubDate, summary, link, imageLink)
         debugger;
         if(savedPodcastDate < podcastDate){
             if(removePodcast(series)){
-                console.log(`Removed, ${savedPodcast.series}, ${savedPodcast.title}`);
+                debugger //post remove
+                console.log(`Removed, ${savedPodcast.series}, ${savedPodcast.episodeTitle}`);
+                // HAVE TO FETCH THE PODCASTS AGAIN FOOL! SO LONG TO FIND THIS!!!!!
+                // IT WAS REMOVING IT THEN RE-ADDING THE PODCAST BECAUSE YOU USED THE LOCALLY STORRED ONE!
+                podcasts = fetchPodcasts();
                 podcasts.push(podcast);
-                console.log(`Added: ${podcast.series}, ${podcast.title}`);
+                console.log(`Added: ${podcast.series}, ${podcast.episodeTitle}`);
                 savePodcasts(podcasts);
+                return true;
             }else{
                 console.log('Failed to remove podcast');
                 return false;
@@ -81,9 +86,12 @@ var addLatestPodcast = (series, episodeTitle, pubDate, summary, link, imageLink)
 };
 
 var removePodcast = (series) => {
+    // REFACTOR, RETURN THE FILTERED ARRAY, NOT A BOOLEAN.  OTHERWISE YOU HAVE TO RECALL FETCHPODCASTS;
     var podcasts = fetchPodcasts();
     var filteredPodcasts = podcasts.filter((podcast) => podcast.series !== series);
     savePodcasts(filteredPodcasts);
+
+    debugger; //DEBUG HERE
     
     return podcasts.length != filteredPodcasts.length;
 }
@@ -99,8 +107,6 @@ var getLatestSavedPodcast = (series) =>{
 
     if(latestPodcast.length === 0){
         return undefined;
-    }else if(latestPodcast.length > 1){
-        throw new Error('More than one podcast of that series saved!');    
     }else{
         return latestPodcast[0];
     }
