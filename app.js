@@ -1,5 +1,4 @@
 const feedparser = require('feedparser-promised');
-const cron = require('cron')
 const logger = require('simple-node-logger').createSimpleLogger('podcast-bot.log');
 
 const twitter = require('./twitter-bot/twitter_bot.js');
@@ -40,37 +39,25 @@ var generateImages = (podcast) => {
 };
 
 
-var job1 = new cron.CronJob({
-    // Runs every 4 hours
-    cronTime: '0 0 */4 * * *',
-    onTick: () => {
-        // The Changelog
-        updatePodcast('https://changelog.com/podcast/feed');
-        // CodeNewbie
-        updatePodcast('http://feeds.codenewbie.org/cnpodcast.xml');
-        // JSParty
-        updatePodcast('https://changelog.com/jsparty/feed');
-        // Request For Commits
-        updatePodcast('https://changelog.com/rfc/feed');
-        // Software Engineering Daily
-        updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
-        // JavascriptJabber
-        updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
-        // Spotlight
-        updatePodcast('https://changelog.com/spotlight/feed');
-        // Go Time
-        updatePodcast('https://changelog.com/gotime/feed');
-    },
-    start: true,
-    timeZone: 'America/New_York'
-});
+// The Changelog
+updatePodcast('https://changelog.com/podcast/feed');
+// CodeNewbie
+updatePodcast('http://feeds.codenewbie.org/cnpodcast.xml');
+// JSParty
+updatePodcast('https://changelog.com/jsparty/feed');
+// Request For Commits
+updatePodcast('https://changelog.com/rfc/feed');
+// Software Engineering Daily
+updatePodcast('http://softwareengineeringdaily.com/feed/podcast/');
+// JavascriptJabber
+updatePodcast('https://feeds.feedwrench.com/JavaScriptJabber.rss');
+// Spotlight
+updatePodcast('https://changelog.com/spotlight/feed');
+// Go Time
+updatePodcast('https://changelog.com/gotime/feed');
 
 logger.info('Starting...');
 console.log('Starting...');
-
-console.log(job1.running);
-
-
 
 // GONNA NEED TO REFACTOR PARAMETER INPUT TO GET THIS TO WORK
 // SUSPECT THAT BEST METHOD WOULD BE TO CREATE A PODCAST OBJECT TO
