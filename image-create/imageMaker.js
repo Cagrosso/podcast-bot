@@ -52,6 +52,6 @@ module.exports.createPhoto = (podcast) => {
             quality: 80
         },
         (err) => {
-            logger.error('Failed to create image: ', e);
+            logger.error('Failed to create image: ', err);
         });
 }
